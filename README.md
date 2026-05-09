@@ -1,6 +1,6 @@
 # Student Churn Prediction Model
 
-This project predicts student churn (the likelihood of dropping out) by analyzing financial, academic, and attendance data. It utilizes a trained machine learning model to identify at-risk students before they leave.
+This project predicts student churn (the likelihood of dropping out) by analyzing financial, academic, and attendance data. The project uses a Random Forest approach to identify at-risk students based on historical patterns.
 
 ---
 
@@ -9,20 +9,14 @@ This project predicts student churn (the likelihood of dropping out) by analyzin
 ```text
 Student Churn Prediction Model/
 │
-├── Main_Notebook.ipynb       # Primary development notebook with sequential project steps
+├── Main_Notebook.ipynb       # Primary development and EDA notebook
 ├── main.py                   # Driver code for running predictions
-├── churn_model.pkl           # Trained ML model serialization
 ├── dependencies.txt          # Required Python packages
 ├── README.md                 # Project documentation
+├── .gitignore                # Configured to exclude .pkl and data/*.csv
 │
-├── data/                     # Input CSV files for processing
-│   ├── invoices.csv
-│   ├── marks.csv
-│   ├── attendance1.csv
-│   ├── attendance2.csv
-│   ├── attendance3.csv
-│   ├── attendance4.csv
-│   └── Ultimate1.csv         # Pre-transformed dataset used for training
+├── data/                     # (Local only) Input CSV files for processing
+│   └── .gitkeep              # Ensures the directory structure exists in Git
 │
 └── output/                   # Generated results and visualizations
     ├── predictions.csv       # Final churn predictions
@@ -46,53 +40,56 @@ cd "My-Projects/AI or ML Projects/Student Churn Prediction Model"
 
 ### 2. Install Dependencies
 
-Ensure you have Python installed, then run:
-
 ```bash
 pip install -r dependencies.txt
 
 ```
 
-### 3. Prepare Input Files
+### 3. Download Model Weights
 
-Place your raw CSV data files into the `data/` folder. Ensure the filenames match those listed in the requirements below.
+Due to file size, the trained model is hosted on Hugging Face.
+
+* **Download:** [`churn_model.pkl`](https://huggingface.co/samishah2004/Student-Churn-Prediction-Model/tree/main) 
+* **Action:** Place the downloaded `.pkl` file directly in the **root directory** of this project.
+
+### 4. Prepare Input Data
+
+Place your raw data into the `data/` folder. For security and storage efficiency, these files are ignored by Git. Ensure filenames match the following:
+
+* **Attendance:** `attendance1.csv` through `attendance4.csv`
+* **Invoices:** `invoices.csv`
+* **Grades:** `marks.csv`
 
 ---
 
 ## Running the Project
 
-### 1. Run Predictions
+### Run Predictions
 
-To process the data and generate results, execute:
+Once the model weights and data files are in place, execute the driver script:
 
 ```bash
 python main.py
 
 ```
 
-### 2. View Results
-
-* **Data:** Predictions will be exported to `output/predictions.csv`.
-* **Visuals:** Check `output/feature_importance.png` and `output/tree_visualization.png` for model insights.
-* **Analytics:** Open the `.pbix` file in PowerBI for high-level reporting.
+* **Results:** Churn probabilities will be saved to `output/predictions.csv`.
+* **Insights:** Review `output/feature_importance.png` to see which factors (e.g., attendance vs. grades) most influenced the model.
 
 ---
 
-## Important Data Requirements
+## Data Schema Requirements
 
-For the model to function correctly, the input CSVs must follow this strict schema:
+The input CSVs must contain the following columns for the preprocessing pipeline to work:
 
-### 1. Attendance Data
+| File Type | Required Columns |
+| --- | --- |
+| **Attendance** | `ATT_STATUS`, `ATT_DATE`, `SYSTEM_ID` |
+| **Invoices** | `PAID_DATE`, `DUE_DATE`, `SYSTEM_ID` |
+| **Grades** | `TERM_NAME`, `SUBJECT_NAME`, `OBTAINED_MARKS`, `TOTAL_MARKS`, `SYSTEM_ID` |
 
-* **Files:** Must be provided as four separate files: `attendance1.csv`, `attendance2.csv`, `attendance3.csv`, and `attendance4.csv`.
-* **Required Columns:** `ATT_STATUS`, `ATT_DATE`, `SYSTEM_ID`.
+---
 
-### 2. Invoice Data
+## Note on Model Hosting
 
-* **File Name:** `invoices.csv`
-* **Required Columns:** `PAID_DATE`, `DUE_DATE`, `SYSTEM_ID`.
-
-### 3. Grades Data
-
-* **File Name:** `marks.csv`
-* **Required Columns:** `TERM_NAME`, `SUBJECT_NAME`, `OBTAINED_MARKS`, `TOTAL_MARKS`, `SYSTEM_ID`.
+The model weights are tracked externally to keep the repository lightweight. If you update the model, ensure you upload the new version to Hugging Face and update the link in this README.
