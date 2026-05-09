@@ -4,7 +4,7 @@ This project predicts student churn (the likelihood of dropping out) by analyzin
 
 ---
 
-## 📂 Folder Structure
+## Folder Structure
 
 ```text
 Student Churn Prediction Model/
@@ -34,7 +34,7 @@ Student Churn Prediction Model/
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repository
 
@@ -59,7 +59,7 @@ Place your raw CSV data files into the `data/` folder. Ensure the filenames matc
 
 ---
 
-## ▶️ Running the Project
+## Running the Project
 
 ### 1. Run Predictions
 
@@ -78,7 +78,7 @@ python main.py
 
 ---
 
-## ⚠️ Important Data Requirements
+## Important Data Requirements
 
 For the model to function correctly, the input CSVs must follow this strict schema:
 
