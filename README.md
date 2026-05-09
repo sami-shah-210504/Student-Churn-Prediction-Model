@@ -1,6 +1,6 @@
 # Student Churn Prediction Model
 
-This project predicts student churn (the likelihood of dropping out) by analyzing financial, academic, and attendance data. The project uses a Random Forest approach to identify at-risk students based on historical patterns.
+This project predicts student churn (the likelihood of dropping out) by analyzing financial, academic, and attendance data. The project uses a Random Forest and Gradient Boosting approach to identify at-risk students based on historical patterns.
 
 ---
 
